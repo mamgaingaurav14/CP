@@ -1,1 +1,0 @@
-https://leetcode.com/problems/minimum-number-of-valid-strings-to-form-target-i/description/

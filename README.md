@@ -1,3 +1,3 @@
 # CP
 <br>
-A place where I am adding all my cp codes to keep track of my progress as well giving solutions of the questions.
+I am creating this repository to upload solutions of cp sheets to my github repository.
