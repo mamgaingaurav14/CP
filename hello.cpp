@@ -1,7 +1,7 @@
 #include <iostream>
 using namespace std;
 int main(){
-    cout<<"hellow";
+    cout<<"hell";
     return 0;
     
 }
