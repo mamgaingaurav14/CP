@@ -1,0 +1,11 @@
+ vector<int> pars(string str){
+    vector<int> ans;
+    stringstream ss(str);
+    string word;
+
+    while (getline(ss, word, ' ')) { // Split by space
+        if (!word.empty()) // Avoid empty words due to consecutive spaces
+            ans.push_back(stoi(word.substr(2)));
+    }
+   return ans;
+}

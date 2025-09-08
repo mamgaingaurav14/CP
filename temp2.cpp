@@ -1,31 +1,22 @@
+ auto comp = [](const pair<int, int>& pp, const int val) {
+    return pp.first < val;
+     };
 
- 
-#include <bits/stdc++.h>
-using namespace std;
-const int MOD=1e9+7;
-#define lil long long int
+        
 
-vector<int> getFinalState(vector<int>& nums, int k, int multiplier) {
-        while(k--){
-            lil mini=0;
-            for(lil i=1;i<nums.size();i++){
-               if(nums[i]<nums[mini]) mini=i;
-            }
-            nums[mini]=(nums[mini]%MOD*multiplier%MOD)%MOD;
+    int numOfUnplacedFruits(vector<int>& fruits, vector<int>& baskets) {
+        int cnt=0,n=fruits.size();
+        vector<pair<int,int>> vec;
+        for(int i=0;i<n;i++){
+            vec.push_back({baskets[i],i});
         }
-        for(lil i=0;i<nums.size();i++){
-            nums[i]=nums[i]%MOD;
+        sort(vec.begin(),vec.end());
+        for(int i=0;i<n;i++){
+           int val=fruits[i];
+           auto it=lower_bound(vec.begin(),vec.end(),val,comp);
+           if(it!=vec.end()) vec.erase(it);
+           else cnt++;
         }
-        return nums;
+        return cnt;
     }
-int main(){
-    ios_base::sync_with_stdio(0);
-    cin.tie(0); cout.tie(0);
-   
-    
-}
- 
- 
-//HARE KRISHNA HARE KRISHNA
-//KRISHNA KRISHNA HARE HARE
-//HARE RAMA HARE RAMA
+

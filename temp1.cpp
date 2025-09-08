@@ -4,90 +4,48 @@
 using namespace std;
 const int MOD=1e9+7;
 #define lil long long int
- 
-     //write your code
-     bool check2(vector<char> &x,vector<char> &y){
-       pair<char,char> a={x[0],y[0]};
-       bool flag=false;
-       int index;
-       for(int i=1;i<=3;i++){
-        pair<char,char> b={y[i],x[i]};
-        if(a==b){
-          flag=true;
-          index=i;
-        } 
-       }
-       if(!flag) return false;
-       if(index==1) {
-        index=2;
-       }
-       else index=1;
-        a={x[index],y[index]};
-        flag=false;
-       for(int i=index+1;i<=3;i++){
-        pair<char,char> b={y[i],x[i]};
-        if(a==b) flag=true;
-       }
-       if(!flag) return false;
-       return true;
-     }
-   bool check(string a,string b){
-   int size_a=a.size();
-   int size_b=b.size();
-   int diff=abs(size_a-size_b);
-   if(size_a>size_b){
-       while(diff--){
-        b="0"+b;
-      }
-   }
-   else if(size_b>size_a){
-       while(diff--){
-        a="0"+a;
-      }
-   }
-   int cnt=0;
-   vector<char > x(4),y(4);
-   for(int i=0;i<a.size();i++){
-      if(a[i]!=b[i]){
-        cnt++;
-        if(cnt>4) return false;
-        x.push_back(a[i]);
-        y.push_back(b[i]);
-        if(cnt==4 ){
-          if(check2(x,y)) return true;
-          return false;
-        }
-      }
-   }
-   if(cnt<4) return false;
-   return true;
-}
- 
- 
-     //write your code
- int countPairs(vector<int>& nums) {
-        int n=nums.size();
-        lil cnt=0;
-        for(int i=0;i<nums.size();i++){
-            string a=to_string(nums[i]);
-            for(int j=i+1;j<n;j++){
-               string b=to_string(nums[j]);
-               if(a==b || check(a,b)){
-                 cnt++;
-               } 
-            }
-        }
-        return cnt;
-    }
+
 
 int main(){
+
     ios_base::sync_with_stdio(0);
     cin.tie(0); cout.tie(0);
-    vector<int> nums={1,10,100};
-    cout<<countPairs(nums);
+     #ifndef ONLINE_JUDGE
+        freopen("input.txt","r",stdin);
+        freopen("output.txt","w",stdout);
+    #endif
+   lil t;
+   cin>>t;
+
+    while(t--){
+    int n;vector<int> vec(n);
+    cin>>n;
+    for(int i=0;i<n;i++) cin>>vec[i];
+    int dp[n+1][n+1][n+1];
+    for(int i=0;i<=n;i++){
+      for(int j=0;j<=n;j++) {
+        if(j==0) dp[n][i][j]=i;
+        else dp[n][i][j]=0;//puri ni karpaye to zero
+      }
+    }
+    for(int i=n-1;i>=0;i--){
+       for(int j=1;j<=n;j++){
+         for(int k=0;k<j;k++){
+             if(k>0){
+              if(vec[i]==j) dp[i][j][k]=dp[i+1][j][k-1];//take 
+              else dp[i][j][k]=dp[i+1][j][k]; //no take 
+             }
+             else{
+               dp[i][j][k]=  max(j+dp[i+1][vec[i]][vec[i]-1],dp[i+1][j][k]);
+             }
+         }
+       }
+    }
+    cout<<dp[0][][0]
+   
+    }
+    
 }
  
  
-//HARE KRISHNA HARE KRISHNA
-//KRISHNA KRISHNA HARE HARE
-//HARE RAMA HARE RAMA
+//Jai Hind

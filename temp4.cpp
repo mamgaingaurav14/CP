@@ -1,17 +1,45 @@
 
- 
 #include <bits/stdc++.h>
 using namespace std;
-const int MOD=1e9+7;
-#define lil long long int
 
-int main(){
-    vector<int> gg={1,2,2,3};
-cout<<"gaurav"<<endl;
-return 0;
-}
- 
- 
-//HARE KRISHNA HARE KRISHNA
-//KRISHNA KRISHNA HARE HARE
-//HARE RAMA HARE RAMA
+  struct TreeNode {
+      int val;
+     TreeNode *left;
+      TreeNode *right;
+       TreeNode(int val) : val(val) , left(nullptr) , right(nullptr) {}
+  };
+
+
+
+unordered_map<TreeNode* ,bool> pp,qq;
+
+  bool find_p(TreeNode* node,TreeNode* p){
+    if(node==NULL) return false;
+    if(node==p) return pp[node]=true;
+    return pp[node]=find_p(node->left,p)||find_p(node->right,p);
+  }
+  bool find_q(TreeNode* node,TreeNode* q){
+    if(node==NULL) return false;
+    if(node==q) return qq[node]=true;
+    return qq[node]=find_q(node->left,q)||find_q(node->right,q);
+  }
+  TreeNode* dfs(TreeNode* root){
+    if(!root) return NULL;
+    if(pp[root->left] && qq[root->right]) return root;
+    if(dfs(root->left)) return dfs(root->left);
+    return dfs(root->right);
+  }
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        find_p(root,p); find_q(root,q);
+        return dfs(root);
+    }
+
+    int main(){
+      #ifndef ONLINE_JUDGE
+        freopen("input.txt","r",stdin);
+        freopen("output.txt","w",stdout);
+    #endif
+    
+    
+   
+    }
